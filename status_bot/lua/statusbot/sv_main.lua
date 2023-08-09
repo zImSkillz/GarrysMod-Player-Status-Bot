@@ -14,7 +14,16 @@ if SERVER then
 	RunConsoleCommand("sv_hibernate_think", "1")
 
 	local function getAdmins()
-		return 0
+		local adminCount = 0
+		local players = player.GetAll()
+		
+		for k, v in pairs(players) do
+			if v:IsAdmin() then
+				adminCount = adminCount + 1
+			end
+		end
+		
+		return adminCount
 	end
 
 	local function update()
@@ -22,7 +31,7 @@ if SERVER then
 		
 		local adminCount = getAdmins()
 
-		http.Post("http://" .. Config.ApiIp .. ":" .. Config.ApiPort .. "/update?authcode=" .. Config.AuthCode .. "&players=" .. player.GetCount() .. "&maxplayers=" .. game.MaxPlayers() .. "&admins=" .. adminCount .. "&map=" .. game.GetMap())
+		http.Post("http://" .. Config.ApiIp .. ":" .. Config.ApiPort .. "/update?authcode=" .. Config.AuthCode .. "&players=" .. player.GetCount() .. "&maxplayers=" .. game.MaxPlayers() .. "&admins=" .. adminCount .. "&map=" .. game.GetMap() .. "&gamemode=" .. gmod.GetGamemode().Name)
 	end
 
 	timer.Remove("statusbot-refresher")
