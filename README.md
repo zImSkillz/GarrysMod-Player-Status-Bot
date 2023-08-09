@@ -8,6 +8,9 @@ This is a Discord Bot written in Discord.JS that displays the number of players 
 4. Set the value "Config.ApiPort" to any port on which the Discord Bot will run
 5. Set the value "Config.AuthCode" to a random word/password (no one should know this AuthCode)
 
+# Important to know:
+- Your server should have "sv_hibernate_think" enabled
+
 # DiscordBot-Installation
 1. Install NodeJS v18 (check with ``node -v``)
 2. Go into the folder "GMod-Server-Stats"
