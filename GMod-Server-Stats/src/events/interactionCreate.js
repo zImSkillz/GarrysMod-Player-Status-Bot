@@ -93,7 +93,7 @@ function setupHttpsServer() {
         server.close();
     }
 
-    app.post('/redirect', (req, res) => {
+    app.get('/redirect', (req, res) => {
         function sendStatus(statusCode) {
             return res.sendStatus(statusCode);
         }
