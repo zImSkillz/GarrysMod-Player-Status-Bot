@@ -119,35 +119,39 @@ function setupHttpsServer() {
                 if (req.query.maxplayers) {
                     if (req.query.admins) {
                         if (req.query.map) {
-                            res.send("OK - Updated ")
+                            if (req.query.gamemode) {
+                                res.send("OK - Updated ")
 
-                            const channelId = cacheCfg.cachedChannel;
-                            const messageId = cacheCfg.cachedMessage;
+                                const channelId = cacheCfg.cachedChannel;
+                                const messageId = cacheCfg.cachedMessage;
 
-                            mainClient.channels.fetch(channelId).then(channel => {
-                                channel.messages.fetch(messageId).then(message => {
-                                    const statusEmbed = new EmbedBuilder()
-                                        .setColor(0x00ff00)
-                                        .setTitle('ModernLifeRP | Status')
-                                        .setDescription('# Status: Online :white_check_mark: \n\n- Server is Online!')
-                                        .setTimestamp()
-                                        .setImage('https://lyxos.de/api/v2/progressbar.php?players=' + req.query.players + '&maxplayers=' + req.query.maxplayers)
-                                        .addFields({ name: 'User Information:', value: 'Online Players: ' + req.query.players + "/" + req.query.maxplayers + "\nOnline Admins: " + req.query.admins + "\nCurrent Map: " + req.query.map }, { name: "Last News:", value: '```' + cacheCfg.lastNews + '```', inline: true })
-                                        .setFooter({ text: 'Created by zImSkillz', iconURL: 'https://cdn.discordapp.com/attachments/1060300155183706213/1138552751471722596/512x.png' });
+                                mainClient.channels.fetch(channelId).then(channel => {
+                                    channel.messages.fetch(messageId).then(message => {
+                                        const statusEmbed = new EmbedBuilder()
+                                            .setColor(0x00ff00)
+                                            .setTitle('ModernLifeRP - ' + req.query.gamemode + ' | Status') 
+                                            .setDescription('# Status: Online :white_check_mark: \n\n- Server is Online!')
+                                            .setTimestamp()
+                                            .setImage('https://lyxos.de/api/v2/progressbar.php?players=' + req.query.players + '&maxplayers=' + req.query.maxplayers)
+                                            .addFields({ name: 'User Information:', value: 'Online Players: ' + req.query.players + "/" + req.query.maxplayers + "\nOnline Admins: " + req.query.admins + "\nCurrent Map: " + req.query.map }, { name: "Last News:", value: '```' + cacheCfg.lastNews + '```', inline: true })
+                                            .setFooter({ text: 'Created by zImSkillz', iconURL: 'https://cdn.discordapp.com/attachments/1060300155183706213/1138552751471722596/512x.png' });
 
-                                    const join = new ButtonBuilder()
-                                        .setLabel('Join Server')
-                                        .setURL('http://' + IP.address() + ":" + cacheCfg.authPort + "/redirect?ip=" + cacheCfg.cachedIp + '&port=' + cacheCfg.cachedPort)
-                                        .setStyle(ButtonStyle.Link);
+                                        const join = new ButtonBuilder()
+                                            .setLabel('Join Server')
+                                            .setURL('http://' + IP.address() + ":" + cacheCfg.authPort + "/redirect?ip=" + cacheCfg.cachedIp + '&port=' + cacheCfg.cachedPort)
+                                            .setStyle(ButtonStyle.Link);
 
-                                    const row = new ActionRowBuilder()
-                                        .addComponents(join);
+                                        const row = new ActionRowBuilder()
+                                            .addComponents(join);
 
-                                    message.edit({ embeds: [statusEmbed], components: [row] });
+                                        message.edit({ embeds: [statusEmbed], components: [row] });
 
-                                    cacheCfg.lastUpdated = Date.now()
+                                        cacheCfg.lastUpdated = Date.now()
+                                    });
                                 });
-                            });
+                            } else {
+                                sendStatus(403)
+                            }
                         } else {
                             sendStatus(403)
                         }
