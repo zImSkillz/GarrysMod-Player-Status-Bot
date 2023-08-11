@@ -33,6 +33,5 @@ This is a Discord Bot written in Discord.JS that displays the number of players 
 - Just use the command: "/setupnews"
 
 # Screenshots:
-![image](https://github.com/zImSkillz/GarrysMod-Player-Status-Bot/assets/83404249/4ff103fd-4745-471b-b2b2-2b293c7fa242)
-![image](https://github.com/zImSkillz/GarrysMod-Player-Status-Bot/assets/83404249/d88d48b9-7bb4-4d4e-a9c4-9c00a698f0dd)
-![image](https://github.com/zImSkillz/GarrysMod-Player-Status-Bot/assets/83404249/cdcc7bb2-8a6b-433b-bc9e-6f910180b120)
+![image](https://i.imgur.com/zhFhzHL.png)
+![image](https://i.imgur.com/sjTrztk.png)
